@@ -713,6 +713,14 @@
         position: fixed;
         bottom: 0;
       }
+      
+      .print-header {
+        display: none !important;
+      }
+      
+      .btn {
+        display: none !important;
+      }
     }
 
     /* Editable elements styles */
@@ -1888,8 +1896,6 @@ Clean modern UI with purple-blue branding</textarea>
     </div>
   </div>
 </div>
-
-
     <div class="page-footer">
       <div class="footer-info">
         <div class="footer-company">Design Deliver Grow</div>
@@ -2320,7 +2326,21 @@ Clean modern UI with purple-blue branding</textarea>
 
     function generateAndPrint() {
       generateProposal();
-      setTimeout(() => window.print(), 200);
+      
+      // Hide all buttons in print header
+      const printHeader = document.querySelector('.print-header');
+      if (printHeader) {
+        printHeader.style.display = 'none';
+      }
+      
+      setTimeout(() => {
+        window.print();
+        
+        // Show print header again after print dialog closes
+        if (printHeader) {
+          printHeader.style.display = 'flex';
+        }
+      }, 200);
     }
 
     function backToForm() {
